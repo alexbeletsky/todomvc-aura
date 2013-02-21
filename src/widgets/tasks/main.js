@@ -39,6 +39,8 @@ define(['jquery', 'underscore'], function ($, _) {
         attachEvents: function () {
             this.$todoList.on('click', '.toggle', this.toggleTask);
             this.$todoList.on('click', '.destroy', this.deleteTask);
+            this.$todoList.on('dblclick', 'label', this.edit);
+            this.$todoList.on('keyup', '.edit', this.updateTask);
         },
 
         newTaskCreated: function(task) {
@@ -58,6 +60,21 @@ define(['jquery', 'underscore'], function ($, _) {
             $task.remove();
 
             this.sandbox.emit('ui/deleteTask', {id: $task.attr('id')});
+        },
+
+        edit: function (e) {
+            $(e.target).closest('li').addClass('editing').find('.edit').focus();
+        },
+
+        updateTask: function (e) {
+            if (e.which === 13) {
+                var value = $(e.target).val();
+                var $task = $(e.target).closest('li');
+                $task.removeClass('editing');
+                $task.find('label').text(value);
+
+                this.sandbox.emit('ui/editTask', { id: $task.attr('id'), description: value});
+            }
         }
     };
 

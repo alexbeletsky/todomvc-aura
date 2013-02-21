@@ -27,12 +27,22 @@ define(['underscore'], function (_) {
         app.sandbox.emit('storage/taskDeleted');
     }
 
+    function editTask(data) {
+        var task = _.find(todos, function(task) {
+            return task.id === data.id;
+        })
+        task.description = data.description;
+
+        app.sandbox.emit('storage/taskEdited');
+    }
+
     return {
         initialize: function (application) {
             app = application;
             app.sandbox.on('ui/createNewTask', createNewTask);
             app.sandbox.on('ui/toggleTask', toggleTask);
             app.sandbox.on('ui/deleteTask', deleteTask);
+            app.sandbox.on('ui/editTask', editTask);
         }
     };
 
