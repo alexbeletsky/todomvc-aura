@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Template • TodoMVC</title>
-	<link rel="stylesheet" href="../assets/base.css">
+	<link rel="stylesheet" href="assets/base.css">
 	<!-- CSS overrides - remove if you don't need it -->
 	<link rel="stylesheet" href="css/app.css">
 	<!--[if IE]>
@@ -13,6 +13,8 @@
 </head>
 <body>
 	<section id="todoapp">
+		<div data-aura-widget="description"></div>
+		<div data-aura-widget="tasks"></div>
 	</section>
 	<footer id="info">
 		<!-- Change this out with your name and url ↓ -->
@@ -20,7 +22,7 @@
 		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 	</footer>
 	<!-- Scripts here. Don't remove this ↓ -->
-	<script src="../assets/base.js"></script>
-	<script data-main="main" src="../components/requirejs/require.js"></script>
+	<script src="assets/base.js"></script>
+	<script data-main="main" src="components/requirejs/require.js"></script>
 </body>
 </html>
