@@ -1,8 +1,8 @@
 require.config({
     paths: {
-        components: './components',
+        components: 'components',
         aura: 'components/aura',
-        underscore: '/components/underscore/underscore'
+        underscore: 'components/underscore/underscore'
     }
 });
 
