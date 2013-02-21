@@ -18,6 +18,7 @@ define(['underscore'], function (_) {
 
             this.sandbox.on('storage/newTaskCreated', this.createNewTask);
             this.sandbox.on('storage/taskToggled', this.taskToggled);
+            this.sandbox.on('storage/taskDeleted', this.taskDeleted);
         },
 
         render: function () {
@@ -42,6 +43,11 @@ define(['underscore'], function (_) {
 
         taskToggled: function(task) {
             task.completed ? this.completedTasks++ : this.completedTasks--;
+            this.render();
+        },
+
+        taskDeleted: function () {
+            this.currentTasks--;
             this.render();
         }
     };

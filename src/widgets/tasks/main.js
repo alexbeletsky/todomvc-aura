@@ -38,6 +38,7 @@ define(['jquery', 'underscore'], function ($, _) {
 
         attachEvents: function () {
             this.$todoList.on('click', '.toggle', this.toggleTask);
+            this.$todoList.on('click', '.destroy', this.deleteTask);
         },
 
         newTaskCreated: function(task) {
@@ -48,8 +49,15 @@ define(['jquery', 'underscore'], function ($, _) {
         toggleTask: function (e) {
             var $task = $(e.target).closest('li');
             $task.toggleClass('completed');
-            
+
             this.sandbox.emit('ui/toggleTask', {id: $task.attr('id')});
+        },
+
+        deleteTask: function (e) {
+            var $task = $(e.target).closest('li');
+            $task.remove();
+
+            this.sandbox.emit('ui/deleteTask', {id: $task.attr('id')});
         }
     };
 
