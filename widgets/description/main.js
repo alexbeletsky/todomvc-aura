@@ -10,8 +10,20 @@ define(['underscore'], function (_) {
         initialize: function () {
             _.bindAll(this);
 
+            this.render();
+            this.cacheElements();
+            this.attachEvents();
+        },
+
+        render: function () {
             this.$el.html(this.template);
+        },
+
+        cacheElements: function () {
             this.$newTodo = this.$el.find('#new-todo');
+        },
+
+        attachEvents: function () {
             this.$el.find('#new-todo').on('keyup', this.createNewTask);
         },
 

@@ -9,10 +9,22 @@ define(function () {
             </section>',
 
         initialize: function () {
+            this.render();
+            this.cacheElements();
+            this.attachEvents();
+        },
+
+        render: function () {
             this.$el.html(this.template);
+        },
+
+        cacheElements: function () {
             this.$todoList = this.$el.find('#todo-list');
             this.$toggleAll = this.$el.find('#toggle-all');
 
+        },
+
+        attachEvents: function () {
             this.sandbox.on('tasks/createNewTask', function () {
                 alert('aaaa');
             });
