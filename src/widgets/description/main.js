@@ -30,7 +30,7 @@ define(['underscore'], function (_) {
         createNewTask: function(e) {
             if (e.which === 13) {
                 var val = this.$newTodo.val();
-                this.sandbox.emit('tasks/createNewTask', {description: val});
+                this.sandbox.emit('ui/createNewTask', {description: val});
                 this.$newTodo.val('');
             }
         }

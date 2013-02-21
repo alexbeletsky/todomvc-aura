@@ -1,4 +1,4 @@
-define(['underscore'], function (_) {
+define(['jquery', 'underscore'], function ($, _) {
 
     return {
         template: 
@@ -9,7 +9,7 @@ define(['underscore'], function (_) {
             </section>',
 
         taskTemplate: 
-            '<li>\
+            '<li id=<%= id%>>\
                 <div class="view">\
                     <input class="toggle" type="checkbox">\
                     <label><%= description %></label>\
@@ -24,6 +24,8 @@ define(['underscore'], function (_) {
             this.render();
             this.cacheElements();
             this.attachEvents();
+
+            this.sandbox.on('storage/newTaskCreated', this.newTaskCreated);
         },
 
         render: function () {
@@ -32,16 +34,22 @@ define(['underscore'], function (_) {
 
         cacheElements: function () {
             this.$todoList = this.$el.find('#todo-list');
-            this.$toggleAll = this.$el.find('#toggle-all');
         },
 
         attachEvents: function () {
-            this.sandbox.on('tasks/createNewTask', this.createNewTask);
+            this.$todoList.on('click', '.toggle', this.toggleTask);
         },
 
-        createNewTask: function(task) {
+        newTaskCreated: function(task) {
             var taskHtml = _.template(this.taskTemplate, task);
             this.$todoList.append(taskHtml);
+        },
+
+        toggleTask: function (e) {
+            var $task = $(e.target).closest('li');
+            $task.toggleClass('completed');
+            
+            this.sandbox.emit('ui/toggleTask', {id: $task.attr('id')});
         }
     };
 
